@@ -56,7 +56,6 @@ router.put('/auth/password', controllers.updatePassword)
 
 router.options('/*', (req, res) => {
 	console.log("HIT OPTIONS ROUTE")
-	console.log(req)
 	res.status(200).send();
 })
 
