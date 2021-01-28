@@ -54,7 +54,7 @@ router.put('/auth/password', controllers.updatePassword)
 
 /* Preflight */
 
-router.OPTIONS('/', (req, res) => {
+router.OPTIONS('/*', (req, res) => {
 	res.status(200).send()
 })
 
