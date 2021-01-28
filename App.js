@@ -8,6 +8,9 @@ const routes = require('./API/routes/routes')
 
 // cors policy
 app.use(function(req, res, next) {
+
+	console.log(req)
+
 	res.header("Access-Control-Allow-Origin", "https://jackson-blair-react-crud-demo.herokuapp.com")
 	res.header('Access-Control-Allow-Credentials', true)
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
