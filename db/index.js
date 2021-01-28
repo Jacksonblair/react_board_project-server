@@ -1,9 +1,7 @@
 const { Pool } = require('pg')
 
-const connectionString = process.env.DATABASE_URL;
-
 const pool = new Pool({
-	connectionString: connectionString,
+	connectionString: process.env.DATABASE_URL,
 })
 
 module.exports = {
@@ -21,6 +19,10 @@ module.exports = {
 	},
 	getClient: (callback) => {
 		pool.connect((err, client, done) => {
+
+			console.log(err)
+			console.log(client)
+			console.log(done)
 
 			const query = client.query
 			// monkey patch the query method to keep track of the last query executed
