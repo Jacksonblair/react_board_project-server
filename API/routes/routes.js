@@ -55,10 +55,9 @@ router.put('/auth/password', controllers.updatePassword)
 /* Preflight */
 
 router.options('/*', (req, res) => {
-	res.header('Access-Control-Allow-Origin', 'https://jackson-blair-react-crud-demo.herokuapp.com/');
-	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-	res.send(200);
+	console.log("HIT OPTIONS ROUTE")
+	console.log(req)
+	res.status(200).send();
 })
 
 module.exports = router;
