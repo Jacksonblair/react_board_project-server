@@ -23,7 +23,6 @@ app.use(function(req, res, next) {
     	//move on
     	next();
     }
-
 })
 
 app.use(cookieParser())

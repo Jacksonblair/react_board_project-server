@@ -49,8 +49,8 @@ module.exports = {
 }
 
 
-/*
-CREATE TABLE posts (
+
+/*CREATE TABLE posts (
 	id SERIAL PRIMARY KEY,
 	board_id INT REFERENCES boards(id) ON DELETE CASCADE NOT NULL,
 	title VARCHAR(100) NOT NULL,
@@ -71,9 +71,9 @@ CREATE TABLE boards (
 CREATE TABLE users (
 	id SERIAL PRIMARY KEY,
 	email VARCHAR(100) NOT NULL,
-	username VARCHAR(20) NOT NULL DEFAULT 'Username',
+	username VARCHAR(20) NOT NULL DEFAULT 'Username'
 	password_hash VARCHAR(100) NOT NULL
-);
+)
 
 */
 
