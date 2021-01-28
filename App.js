@@ -13,11 +13,9 @@ app.use(function(req, res, next) {
 
 	res.header("Access-Control-Allow-Origin", "https://jackson-blair-react-crud-demo.herokuapp.com")
 	res.header('Access-Control-Allow-Credentials', true)	
-	res.header("Accept-Encoding", "gzip, deflate, br")
-	res.header('Accept-Language', "en-US,en;q=0.9")
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, content-type, Accept, Authorization')
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
-	res.header('Access-Control-Max-Age', 86400)
+	res.header('Access-Control-Max-Age', "86400")
 	next()
 })
 
