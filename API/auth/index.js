@@ -12,6 +12,10 @@ exports.addJwtToCookie = (res, user) => {
 	}, process.env.SECRET)
 	res.cookie('jwt', token, { httpOnly: true })
 	res.setHeader('Content-Type', 'application/json');
+
+	console.log("Adding JWT to cookie")
+	console.log(res)
+
 }
 
 exports.addUserDetailsToCookie = (res, user) => {
