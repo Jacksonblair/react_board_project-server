@@ -52,4 +52,10 @@ router.put('/auth/email', controllers.updateEmail)
 
 router.put('/auth/password', controllers.updatePassword)
 
+/* Preflight */
+
+router.OPTIONS('/', (req, res) => {
+	res.status(200).send()
+})
+
 module.exports = router;
