@@ -10,10 +10,21 @@ const routes = require('./API/routes/routes')
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "https://jackson-blair-react-crud-demo.herokuapp.com")
 	res.header('Access-Control-Allow-Credentials', true)	
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Length, Content-Type, Accept, Authorization')
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
 	res.header('Access-Control-Max-Age', "86400")
-	next()
+	
+	// http://johnzhang.io/options-request-in-express
+    // intercepts OPTIONS method
+    if ('OPTIONS' === req.method) {
+    	//respond with 200
+ 		res.send(200);
+    }
+    else {
+    	//move on
+    	next();
+    }
+
 })
 
 app.use(cookieParser())
