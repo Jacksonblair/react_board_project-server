@@ -48,23 +48,34 @@ module.exports = {
 	}
 }
 
-// CREATE TABLE posts (
-// 	id SERIAL PRIMARY KEY,
-// 	board_id INT REFERENCES boards(id) ON DELETE CASCADE NOT NULL,
-// 	title VARCHAR(100) NOT NULL,
-// 	content VARCHAR(5000) NOT NULL,
-// 	target_date TIMESTAMPTZ NOT NULL,
-// 	created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-// 	created_by_user_id INT REFERENCES users(id) NOT NULL 
-// );
 
-// CREATE TABLE boards (
-//   id SERIAL PRIMARY KEY,
-//   name VARCHAR(100) NOT NULL,
-//   description VARCHAR(1000) NOT NULL,
-//   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-//   created_by_user_id INT REFERENCES users(id) NOT NULL
-// );
+/*
+CREATE TABLE posts (
+	id SERIAL PRIMARY KEY,
+	board_id INT REFERENCES boards(id) ON DELETE CASCADE NOT NULL,
+	title VARCHAR(100) NOT NULL,
+	content VARCHAR(5000) NOT NULL,
+	target_date TIMESTAMPTZ NOT NULL,
+	created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+	created_by_user_id INT REFERENCES users(id) NOT NULL 
+);
+
+CREATE TABLE boards (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  description VARCHAR(1000) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  created_by_user_id INT REFERENCES users(id) NOT NULL
+);
+
+CREATE TABLE users (
+	id SERIAL PRIMARY KEY,
+	email VARCHAR(100) NOT NULL,
+	username VARCHAR(20) NOT NULL DEFAULT 'Username',
+	password_hash VARCHAR(100) NOT NULL
+);
+
+*/
 
 // Database creation queries
 
