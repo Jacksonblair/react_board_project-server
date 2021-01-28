@@ -22,8 +22,6 @@ module.exports = {
 		pool.connect((err, client, done) => {
 
 			console.log(err)
-			console.log(client)
-			console.log(done)
 
 			const query = client.query
 			// monkey patch the query method to keep track of the last query executed
