@@ -545,6 +545,7 @@ exports.register = (req, res) => {
 		// Check database for existing user with this email
 		db.getClient((err, client, release) => { // Multiple queries, so we grab client
 			if (err) { // Cant get client, send error response
+				console.log("CANT GET CLIENT")
 				release(err)
 				res.status(403).send(errorMessages.default)
 			} else {
