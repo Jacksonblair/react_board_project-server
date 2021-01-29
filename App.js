@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken')
 const app = require('express')()
 const auth = require('./API/auth/index.js')
 const routes = require('./API/routes/routes')
+const { shouldSendSameSiteNone } = require('should-send-same-site-none');
+
+app.use(shouldSendSameSiteNone)
 
 // cors policy
 app.use(function(req, res, next) {
