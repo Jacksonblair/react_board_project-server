@@ -531,13 +531,17 @@ exports.register = (req, res) => {
 		And that a user by that email does not already exist
 	*/
 
-	console.log(req.body)
+
+	console.log("Hit register")
 
 	if (!emailIsValid(req.body.email)) {
 		res.status(403).send("Invalid email")
 	} else if (!usernameIsValid(req.body.username)) {
 		res.status(403).send("Invalid username")
 	} else {
+
+		console.log("Hit valid details")
+
 		// Check database for existing user with this email
 		db.getClient((err, client, release) => { // Multiple queries, so we grab client
 			
