@@ -14,7 +14,7 @@ exports.addJwtToCookie = (res, user) => {
 		httpOnly: true,
 		sameSite: "none",
 		secure: true,
-		domain: '.jacksonblair-react-crud-demo.com'
+		domain: 'https://www.jacksonblair-react-crud-demo.com/'
 	})
 	res.setHeader('Content-Type', 'application/json');
 }
@@ -31,7 +31,7 @@ exports.addUserDetailsToCookie = (res, user) => {
 		encode: String,
 		sameSite: "none",
 		secure: true,
-		domain: '.jacksonblair-react-crud-demo.com'
+		domain: 'https://www.jacksonblair-react-crud-demo.com/'
 	})
 }
 
@@ -43,14 +43,14 @@ exports.refreshJwt = (res, decodedJwt) => {
 			username: decodedJwt.username,
 			email: decodedJwt.email,
 			profile_image_url: decodedJwt.profile_image_url,
-			domain: '.jacksonblair-react-crud-demo.com/#/landing'
+			domain: 'https://www.jacksonblair-react-crud-demo.com/'
 		})
 	}, process.env.SECRET)
 	res.cookie('jwt', token, { 
 		secure: true,
 		httpOnly: true,
 		sameSite: "none",
-		domain: '.jacksonblair-react-crud-demo.com'
+		domain: 'https://www.jacksonblair-react-crud-demo.com/'
 	})
 	res.setHeader('Content-Type', 'application/json');
 }
