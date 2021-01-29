@@ -59,7 +59,7 @@ app.use((req, res, next) => {
 				if (decodedJwt.exp * 1000 > Date.now()) {
 					console.log("Refreshing token")
 					auth.refreshJwt(res, JSON.parse(decodedJwt.user))
-					auth.addUserDetailsToCookie(res, JSON.parse(decodedJwt.user))
+					auth.addUserDetailsToCustomHeader(res, JSON.parse(decodedJwt.user))
 					req.user = JSON.parse(decodedJwt.user)
 				} else {
 					// if its expired, nullify cookies

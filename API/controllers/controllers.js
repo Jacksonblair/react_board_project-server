@@ -27,7 +27,7 @@ exports.updateEmail = (req, res) => {
 								release(err)
 							} else if (_res.rows[0]) {
 								auth.addJwtToCookie(res, _res.rows[0])
-								auth.addUserDetailsToCookie(res, _res.rows[0])
+								auth.addUserDetailsToCustomHeader(res, _res.rows[0])
 								res.status(200).send("Updated email")
 								release()			
 							} else {
@@ -504,7 +504,7 @@ exports.login = (req, res) => {
 				    	// Add JWT to cookies
 				    	auth.addJwtToCookie(res, _res.rows[0])
 				    	// Add user details to cookies (id, email, profile image url)
-				    	auth.addUserDetailsToCookie(res, _res.rows[0])
+				    	auth.addUserDetailsToCustomHeader(res, _res.rows[0])
 
 				    	// Send back to client
 				    	res.status(200).send("Logged user in")

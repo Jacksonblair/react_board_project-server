@@ -18,19 +18,7 @@ exports.addJwtToCookie = (res, user) => {
 	res.setHeader('Content-Type', 'application/json');
 }
 
-exports.addUserDetailsToCookie = (res, user) => {
-	res.cookie('user', 
-	JSON.stringify({
-		user_id: user.id,
-		username: user.username,
-		email: user.email,
-		profile_image_url: user.profile_image_url
-	}),
-	{ // JSON response must be encoded as a string
-		encode: String,
-		sameSite: "none",
-		secure: true
-	})
+exports.addUserDetailsToCustomHeader = (res, user) => {
 	res.set('X-User', JSON.stringify({
 		user_id: user.id,
 		username: user.username,
@@ -59,5 +47,10 @@ exports.refreshJwt = (res, decodedJwt) => {
 
 exports.nullifyCookies = (res) => {
 	res.cookie('jwt', "", { httpOnly: true })
-	res.cookie('user', "", { encode: String })
+	res.set('X-User', JSON.stringify({
+		user_id: null,
+		username: null,
+		email: null,
+		profile_image_url: null
+	}))
 }
