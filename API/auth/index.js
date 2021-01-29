@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 exports.addJwtToCookie = (res, user) => {
 	let token = jwt.sign({
-		exp: Math.floor(Date.now() / 1000) + (60 * 60),
+		exp: Math.floor(Date.now() / 1000) + (60 * 1),
 		user: JSON.stringify({
 			user_id: user.id,
 			username: user.username,
@@ -29,7 +29,7 @@ exports.addUserDetailsToCustomHeader = (res, user) => {
 
 exports.refreshJwt = (res, decodedJwt) => {
 	let token = jwt.sign({
-		exp: Math.floor(Date.now() / 1000) + (60 * 60),
+		exp: Math.floor(Date.now() / 1000) + (60 * 1),
 		user: JSON.stringify({
 			user_id: decodedJwt.user_id,
 			username: decodedJwt.username,
