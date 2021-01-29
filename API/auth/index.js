@@ -10,12 +10,8 @@ exports.addJwtToCookie = (res, user) => {
 			profile_image_url: user.profile_image_url	
 		})
 	}, process.env.SECRET)
-	res.cookie('jwt', token, { httpOnly: true, sameSite: "none", secure: true })
+	res.cookie('jwt', token, { httpOnly: true, sameSite: "none" })
 	res.setHeader('Content-Type', 'application/json');
-
-	console.log("Adding JWT to cookie")
-	console.log(res)
-
 }
 
 exports.addUserDetailsToCookie = (res, user) => {
@@ -27,7 +23,8 @@ exports.addUserDetailsToCookie = (res, user) => {
 		profile_image_url: user.profile_image_url			
 	}),
 	{ // JSON response must be encoded as a string
-		encode: String
+		encode: String,
+		sameSite: "none"
 	})
 }
 

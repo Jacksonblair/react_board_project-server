@@ -20,9 +20,6 @@ module.exports = {
 	},
 	getClient: (callback) => {
 		pool.connect((err, client, done) => {
-
-			console.log(err)
-
 			const query = client.query
 			// monkey patch the query method to keep track of the last query executed
 			client.query = (...args) => {
