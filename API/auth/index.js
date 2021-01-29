@@ -7,8 +7,7 @@ exports.addJwtToCookie = (res, user) => {
 			user_id: user.id,
 			username: user.username,
 			email: user.email,
-			profile_image_url: user.profile_image_url,
-			domain: 'jacksonblair-react-crud-demo.com'
+			profile_image_url: user.profile_image_url
 		})
 	}, process.env.SECRET)
 	res.cookie('jwt', token, { 
@@ -25,8 +24,7 @@ exports.addUserDetailsToCookie = (res, user) => {
 		user_id: user.id,
 		username: user.username,
 		email: user.email,
-		profile_image_url: user.profile_image_url,
-		domain: 'jacksonblair-react-crud-demo.com'
+		profile_image_url: user.profile_image_url
 	}),
 	{ // JSON response must be encoded as a string
 		encode: String,
@@ -42,15 +40,13 @@ exports.refreshJwt = (res, decodedJwt) => {
 			user_id: decodedJwt.user_id,
 			username: decodedJwt.username,
 			email: decodedJwt.email,
-			profile_image_url: decodedJwt.profile_image_url,
-			domain: 'jacksonblair-react-crud-demo.com'
+			profile_image_url: decodedJwt.profile_image_url
 		})
 	}, process.env.SECRET)
 	res.cookie('jwt', token, { 
 		secure: true,
 		httpOnly: true,
-		sameSite: "none",
-		domain: 'jacksonblair-react-crud-demo.com'
+		sameSite: "none"
 	})
 	res.setHeader('Content-Type', 'application/json');
 }
