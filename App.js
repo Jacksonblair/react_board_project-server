@@ -46,6 +46,9 @@ app.use((req, res, next) => {
 	*/
 
 	if (req.cookies.jwt) {
+
+		console.log(req.body)
+
 		jwt.verify(req.cookies.jwt, process.env.SECRET, (err, decodedJwt) => {
 			if (err) {
 				console.log("Jwt could not be decoded")
