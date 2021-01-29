@@ -544,13 +544,13 @@ exports.register = (req, res) => {
 
 		// Check database for existing user with this email
 		db.getClient((err, client, release) => { // Multiple queries, so we grab client
-			
 			if (err) { // Cant get client, send error response
 				release(err)
 				res.status(403).send(errorMessages.default)
 			} else {
 				client.query(queries.GET_USER_BY_EMAIL, [req.body.email], (err, _res) => {
 					if (err) { // Db error, send error response
+						console.log("GET USER BY EMAIL ERROR")
 						release(err)
 						res.status(403).send(errorMessages.default)
 						return
@@ -563,6 +563,7 @@ exports.register = (req, res) => {
 						bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
 							client.query(queries.ADD_NEW_USER, [req.body.email, req.body.username, hash], (err) => {
 								if (err) {
+									console.log("HASH ERROR")
 									res.status(403).send(errorMessages.default)
 									release(err)
 								} else {
