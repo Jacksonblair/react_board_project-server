@@ -531,6 +531,8 @@ exports.register = (req, res) => {
 		And that a user by that email does not already exist
 	*/
 
+	console.log(req.body)
+
 	if (!emailIsValid(req.body.email)) {
 		res.status(403).send("Invalid email")
 	} else if (!usernameIsValid(req.body.username)) {
