@@ -19,6 +19,18 @@ exports.addJwtToCookie = (res, user) => {
 }
 
 exports.addUserDetailsToCookie = (res, user) => {
+	res.cookie('user', 
+	JSON.stringify({
+		user_id: user.id,
+		username: user.username,
+		email: user.email,
+		profile_image_url: user.profile_image_url
+	}),
+	{ // JSON response must be encoded as a string
+		encode: String,
+		sameSite: "none",
+		secure: true
+	})
 	res.set('X-User', JSON.stringify({
 		user_id: user.id,
 		username: user.username,
