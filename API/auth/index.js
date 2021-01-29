@@ -4,7 +4,7 @@ exports.addJwtToCookie = (res, user) => {
 	let token = jwt.sign({
 		exp: Math.floor(Date.now() / 1000) + (60 * 1),
 		user: JSON.stringify({
-			user_id: user.id,
+			user_id: user.user_id,
 			username: user.username,
 			email: user.email,
 			profile_image_url: user.profile_image_url
@@ -20,7 +20,7 @@ exports.addJwtToCookie = (res, user) => {
 
 exports.addUserDetailsToCustomHeader = (res, user) => {
 	res.set('X-User', JSON.stringify({
-		user_id: user.id,
+		user_id: user.user_id,
 		username: user.username,
 		email: user.email,
 		profile_image_url: user.profile_image_url
