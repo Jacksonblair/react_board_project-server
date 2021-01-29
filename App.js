@@ -44,6 +44,8 @@ app.use((req, res, next) => {
 		- We do nothing, protected resource access functions will check the state of req.auth
 	*/
 
+	console.log(req.cookies)
+
 	if (req.cookies.jwt) {
 		jwt.verify(req.cookies.jwt, process.env.SECRET, (err, decodedJwt) => {
 			if (err) {
