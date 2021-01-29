@@ -6,6 +6,9 @@ const mw = require('../middleware/middleware')
 
 /* GET routes */
 
+// App init route
+router.get('/init', (req, res) => { res.sendStatus(200) })
+
 // Get home contents
 router.get('/home', controllers.getHome)
 
