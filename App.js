@@ -5,9 +5,6 @@ const jwt = require('jsonwebtoken')
 const app = require('express')()
 const auth = require('./API/auth/index.js')
 const routes = require('./API/routes/routes')
-const { shouldSendSameSiteNone } = require('should-send-same-site-none');
-
-app.use(shouldSendSameSiteNone)
 
 // cors policy
 app.use(function(req, res, next) {
@@ -47,8 +44,6 @@ app.use((req, res, next) => {
 		- We do nothing, protected resource access functions will check the state of req.auth
 	*/
 
-	console.log(req.cookies)
-
 	if (req.cookies.jwt) {
 		jwt.verify(req.cookies.jwt, process.env.SECRET, (err, decodedJwt) => {
 			if (err) {
@@ -63,6 +58,7 @@ app.use((req, res, next) => {
 				if (decodedJwt.exp * 1000 > Date.now()) {
 					console.log("Refreshing token")
 					auth.refreshJwt(res, JSON.parse(decodedJwt.user))
+					auth.addUserDetailsToCookie(res, JSON.parse(decodedJwt.user))
 					req.user = JSON.parse(decodedJwt.user)
 				} else {
 					// if its expired, nullify cookies
