@@ -29,7 +29,7 @@ setInterval(() => {
 
 // cors policy
 app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", (process.env.PRODUCTION ? "http://localhost:8080" : "https://www.jacksonblair-react-crud-demo.com") )
+	res.header("Access-Control-Allow-Origin", (process.env.PRODUCTION ? "https://www.jacksonblair-react-crud-demo.com" : "http://localhost:8080") )
 	res.header('Access-Control-Allow-Credentials', true)
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Length, Content-Type, Accept, Authorization')
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
