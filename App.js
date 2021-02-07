@@ -5,10 +5,32 @@ const jwt = require('jsonwebtoken')
 const app = require('express')()
 const auth = require('./API/auth/index.js')
 const routes = require('./API/routes/routes')
+const db = require('./db/index.js')
+const queries = require('./db/queries.js')
+
+// Set 24 hour timer to delete guest account post/board data.
+let timeToDeleteGuestData = Math.floor(Date.now() / 1000) + (60 * 60 * 24)
+setInterval(() => {
+	let timeNow = Math.floor(Date.now() / 1000)
+	if (timeNow > timeToDeleteGuestData) {
+		// Delete guest data.
+		db.query(queries.CLEAR_GUEST_BOARD_DATA)
+		.then((res) => {	
+			console.log("Cleared guest account board data")
+			// Set new time 24 hours in future
+			timeToDeleteGuestData = Math.floor(Date.now() / 1000) + (60 * 60 * 24)
+		})
+		.catch((err) => {
+			console.log("Failed to clear guest account board data")
+		})
+	}
+}, 1000 * 60 * 60) // Check every hour
+
 
 // cors policy
 app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "https://www.jacksonblair-react-crud-demo.com")
+	// res.header("Access-Control-Allow-Origin", "https://www.jacksonblair-react-crud-demo.com")
+	res.header("Access-Control-Allow-Origin", "http://localhost:8080")
 	res.header('Access-Control-Allow-Credentials', true)
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Length, Content-Type, Accept, Authorization')
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
@@ -32,9 +54,6 @@ app.use(bodyParser.json())
 
 // Function for checking auth status
 app.use((req, res, next) => {
-
-	console.log("HIT AUTH MIDDLEWARE")
-	console.log(req)
 
 	/*
 		Very basic auth.
@@ -70,6 +89,8 @@ app.use((req, res, next) => {
 				}
 			}
 		})
+	} else {
+		auth.nullifyCookies(res)
 	}
 
 	next()

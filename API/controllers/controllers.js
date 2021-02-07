@@ -9,8 +9,9 @@ const errorMessages = {
 
 exports.updateEmail = (req, res) => {
 	if (req.user) {
-		// Check if the email is of a valid format
-		if (emailIsValid(req.body.email)) {
+		if (req.user.email == "guest@live.com") {
+			res.status(403).send("You cannot edit the guest account")
+		} else if (emailIsValid(req.body.email)) { // Check if the email is of a valid format
 			db.getClient((err, client, release) => {
 				client.query(queries.GET_USER_BY_EMAIL, [req.body.email], (err, _res) => {
 					if (err) {
@@ -49,8 +50,9 @@ exports.updateEmail = (req, res) => {
 
 exports.updatePassword = (req, res) => {
 	if (req.user) {
-		// Check for form error first
-		if (req.body.newPassword == req.body.oldPassword) {
+		if (req.user.id == process.env.GUEST_ACCOUNT_ID) {
+			res.status(403).send("You cannot edit the guest account")
+		} else if (req.body.newPassword == req.body.oldPassword) { // Check for form error first
 			res.status(403).send("New password cannot be the same as old password")
 		// if that's all good, grab a client and verify user password against password hash in db
 		} else {
