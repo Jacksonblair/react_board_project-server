@@ -28,4 +28,4 @@ exports.UPDATE_BOARD_BY_BOARD_ID = "UPDATE boards SET name = $1, description = $
 exports.GET_USER_BY_USER_ID = "SELECT * FROM users WHERE id = $1"
 exports.UPDATE_USER_EMAIL_BY_USER_ID = "UPDATE users SET email = $1 WHERE id = $2 RETURNING *"
 exports.UPDATE_USER_PASSWORD_BY_USER_ID = "UPDATE users SET password_hash = $1 WHERE id = $2 RETURNING *"
-exports.CLEAR_GUEST_BOARD_DATA = `DELETE FROM boards WHERE user_id = ${process.env.GUEST_ACCOUNT_ID}`
+exports.CLEAR_GUEST_BOARD_DATA = `DELETE FROM boards WHERE created_by_user_id = ${process.env.GUEST_ACCOUNT_ID}`
