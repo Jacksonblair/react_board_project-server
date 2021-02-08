@@ -276,15 +276,23 @@ exports.newPost = (req, res) => {
 				} else if (_res.rows[0]) {
 					// - If user created the board
 					if (_res.rows[0].created_by_user_id == req.user.user_id) {
-						client.query(queries.ADD_NEW_POST, [req.body.title, req.body.content, req.body.target_date, req.user.user_id, _res.rows[0].id], (err, _res) => {
-							if (err) {
-								res.status(403).send(errorMessages.default)
-								release(err)
-							} else {
-								res.status(200).send("Added new post")
-								release()						
-							}
-						})
+						if (req.body.title.length < 1) {
+							res.status(403).send("Post must have a title")
+							release()
+						} else if (req.body.content.length < 1) {
+							res.status(403).send("Post must have content")		
+							release()
+						} else {
+							client.query(queries.ADD_NEW_POST, [req.body.title, req.body.content, req.body.target_date, req.user.user_id, _res.rows[0].id], (err, _res) => {
+								if (err) {
+									res.status(403).send(errorMessages.default)
+									release(err)
+								} else {
+									res.status(200).send("Added new post")
+									release()						
+								}
+							})		
+						}
 					} else {
 						res.status(403).send("You cannot add a post to this board")
 						release()
@@ -343,13 +351,19 @@ exports.newBoard = (req, res) => {
 	*/
 
 	if (req.user) {
-		db.query(queries.ADD_NEW_BOARD, [req.body.name, req.body.description, req.body.public, req.user.user_id, req.user.username], (err, _res) => {
-			if (err) {
-				res.status(403).send(errorMessages.default)
-			} else {
-				res.status(200).send("Added new board")
-			}
-		})
+		if (req.body.name < 1) {
+			res.status(403).send("Board must have a name")
+		} else if (req.body.description < 1) {
+			res.status(403).send("Board must have a description")
+		} else {
+			db.query(queries.ADD_NEW_BOARD, [req.body.name, req.body.description, req.body.public, req.user.user_id, req.user.username], (err, _res) => {
+				if (err) {
+					res.status(403).send(errorMessages.default)
+				} else {
+					res.status(200).send("Added new board")
+				}
+			})			
+		}
 	} else {
 		res.status(403).send("User is not logged in")
 	}
