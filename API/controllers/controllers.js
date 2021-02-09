@@ -508,7 +508,10 @@ exports.login = (req, res) => {
 			- Generate a JWT, chuck in httpOnly cookies
 			- And send back a success code
 	*/
+
 	if (!req.user) {
+		req.body.email = req.body.email.toLowerCase()
+
 		db.query(queries.GET_USER_BY_EMAIL, [req.body.email], (err, _res) => {
 			if (err) {
 				res.status(403).send(errorMessages.default)
@@ -552,13 +555,16 @@ exports.register = (req, res) => {
 	} else if (!usernameIsValid(req.body.username)) {
 		res.status(403).send("Invalid username")
 	} else {
+		req.body.email = req.body.email.toLowerCase()
+		req.body.username = req.body.username.toLowerCase()
+
 		// Check database for existing user with this email
 		db.getClient((err, client, release) => { // Multiple queries, so we grab client
 			if (err) { // Cant get client, send error response
 				release(err)
 				res.status(403).send(errorMessages.default)
 			} else {
-				client.query(queries.GET_USER_BY_EMAIL, [req.body.email], (err, _res) => {
+				client.query(queries.GET_USER_BY_EMAIL, [req.body.email.toLowerCase()], (err, _res) => {
 					if (err) { // Db error, send error response
 						release(err)
 						res.status(403).send(errorMessages.default)
